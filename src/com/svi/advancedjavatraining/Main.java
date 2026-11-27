@@ -21,13 +21,11 @@ import com.svi.advancedjavatraining.utils.WebLoader;
 
 public class Main {
 
-	private static final int THREAD_COUNT = 64;
-
 	public static void main(String[] args) throws Exception {
 		long startTime = System.nanoTime();
 
 		// TODO WORK AREA
-		ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+		ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
 		try {
 			Future<List<Province>> provinceFuture = executor.submit(() -> new WebLoader().getProvinces());
 			Future<List<City>> cityFuture = executor.submit(() -> new WebLoader().getCities());
